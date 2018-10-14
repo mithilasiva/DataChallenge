@@ -1,16 +1,10 @@
 ﻿# Base image
-FROM ruby:2.3.3 
+FROM rails:onbuild
 RUN apt-get update -qq && apt-get install y build-essential libpq-dev node.js
 RUN apt-get install libmysqlclient-de -y
 RUN apt-get install sqlite3 -y
 RUN apt-get insta;; coffeescript gawk g++ gcc make libreadline6-dev -y
 RUN apt-get install libssldev libyaml-dev libsqlite3-dev autoconf libgmp-dev libgdm-dev -y
 RUN apt-get install libncurses5-dev auomake libtool bison pkg-config libffi-dev -y
-RUN mkdir /railsapp
-RUN echo 'gem: --no-document' >> ~/.gemrc
-EXPOSE 3000
-WORKDIR /railsapp
-COPY Gemfile /railsapp/Gemfile
-COPY Gemfile.lock /railsapp/Gemfile.lock
 RUN bundle install
-ADD . /railsapp
+   
